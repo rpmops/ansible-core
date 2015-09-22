@@ -3,5 +3,6 @@
 # This file is managed remotely, all changes will be lost
 
 # Return current timezone
-echo "\"$(cat /etc/timezone)\""
-
+if [ -f /etc/sysconfig/clock ]; then
+    awk -F '=' '$1 ~ /^ZONE$/ {print $2}' /etc/sysconfig/clock
+fi

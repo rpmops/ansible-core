@@ -18,6 +18,14 @@
   tags: [ 'role::core', 'role::ferm', 'role::ferm:config', 'role::tcpwrappers' ]
   become: False
 
+- name: Install required packages
+  yum:
+    name: '{{ item }}'
+    state: 'present'
+  with_flattened:
+    - core_base_packages
+    - core_packages
+
 - name: Read the host UUID
   shell: dmidecode --string system-uuid | tail -n 1 || true
   register: core_register_uuid
@@ -39,15 +47,4 @@
     owner: 'root'
     group: 'root'
     mode: '0755'
-
-- name: Update APT cache and install required packages
-  apt:
-    name: '{{ item }}'
-    state: 'present'
-    install_recommends: False
-    update_cache: True
-    cache_valid_time: '{{ core_cache_valid_time }}'
-  with_flattened:
-    - core_base_packages
-    - core_packages
 

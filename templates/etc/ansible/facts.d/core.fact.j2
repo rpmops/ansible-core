@@ -46,12 +46,6 @@
 {% if core_tpl_ansible_controllers %}
 {%   set _ = core_tpl_facts.update({ "ansible_controllers": core_tpl_ansible_controllers | sort | unique }) %}
 {% endif %}
-{% if core_keyserver|d() %}
-{%   set _ = core_tpl_facts.update({ "keyserver": core_keyserver }) %}
-{% endif %}
-{% if core_cache_valid_time|d() %}
-{%   set _ = core_tpl_facts.update({ "cache_valid_time": core_cache_valid_time }) %}
-{% endif %}
 {% if core_tpl_facts|d() %}
 {{ core_tpl_facts | to_nice_json }}
 {% endif %}

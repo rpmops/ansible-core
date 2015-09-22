@@ -94,19 +94,6 @@ core_reset_tags: False
 core_ansible_controllers: []
 
 
-# .. envvar:: core_cache_valid_time
-#
-# Time in seconds which specifies how long APT cache should be considered
-# valid between updates.
-core_cache_valid_time: '{{ (60 * 60 * 24) }}'
-
-
-# .. envvar:: core_keyserver
-#
-# URL for the GnuPG keyserver on which Ansible will search for encryption keys.
-core_keyserver: 'hkp://pool.sks-keyservers.net'
-
-
 # .. envvar:: core_uuid_random
 #
 # Ansible will try and read the UUID value from the host using ``dmidecode``.
@@ -121,13 +108,13 @@ core_uuid_random: '{{ ansible_fqdn | to_uuid }}'
 # .. envvar:: core_base_packages
 #
 # List of packages required by Ansible local fact scripts.
-core_base_packages: [ 'libcap2-bin' ]
+core_base_packages: []
 
 
 # .. envvar:: core_packages
 #
 # List of additional packages to install.
-core_packages: []
+core_packages: [ 'dmidecode' ]
 
 
 # -------------------
